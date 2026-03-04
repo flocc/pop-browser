@@ -90,7 +90,10 @@ function inject() {
           <span class="tooltip-value"></span>
           <span class="tooltip-text">Bazowa cena dla Euro regionu przeliczona na złotówki</span>
         </span>
-        <span class="pop_arrow gray">🡄</span>
+        <span class="tooltip pop_arrow gray" id="pop_arrow">
+          <span class="tooltip-value">🡄</span>
+          <span class="tooltip-text"></span>
+        </span>
         <span class="tooltip pop_eur" id="pop_eur">
           <span class="tooltip-value"></span>
           <span class="tooltip-text">Bazowa cena dla Euro regionu</span>
@@ -132,6 +135,7 @@ function render(d) {
   val('pop_eur_to_pln').textContent = `${fmt(d.price_eur_to_pln)} zł`;
   val('pop_eur').textContent = `${fmt(d.price_eur)} €`;
   val('pop_valve_eur').textContent = `${fmt(d.valve_price_eur)} €`;
+  document.querySelector('.pop_arrow .tooltip-text').textContent = `EUR/PLN = ${fmt(d.eur_to_pln)}`;
 
   if (d.valve_price_percent_change_pln !== 0) {
     const el = document.getElementById('pop_valve_percent_change_pln');
