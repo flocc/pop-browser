@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Polish Our Prices",
+  "version": "1.0",
+  "description": "xyz",
+  "background": {
+    "service_worker": "background.js",
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://store.steampowered.com/app/*/*"],
+      "js": ["content.js"],
+      "css": ["style.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "host_permissions": [
+    "https://polishourprices.pl/*"
+  ],
+  "browser_specific_settings": {
+    "gecko": { "id": "xyz@polishourprices.pl" }
+  }
+}

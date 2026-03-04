@@ -1,0 +1,116 @@
+.pop {
+  font-family: "Motiva Sans", Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 12px;
+}
+
+.pop .block_content_inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.pop_grid {
+  display: grid;
+  grid-template-columns:
+    minmax(max-content, 14fr)
+    minmax(max-content, 10fr)
+    minmax(max-content, 10fr)
+    minmax(max-content, 10fr)
+    minmax(max-content, 10fr)
+    minmax(max-content, 10fr)
+    minmax(max-content, 10fr);
+  gap: 0.5em 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.pop_separator {
+  grid-column: 1 / -1;
+  border: none;
+  border-top: 1px solid #444;
+  margin: 0.2em 0;
+}
+
+.pop_arrow {
+  justify-self: center;
+}
+
+.pop_eur,
+.pop_eur_to_pln,
+.pop_pln,
+.pop_diff_pln_from_eur,
+.pop_percent_change_pln_from_eur {
+  font-variant-numeric: tabular-nums;
+  font-weight: bold;
+  text-align: right;
+}
+
+.pop_diff_pln_from_eur {
+  grid-column: span 2;
+  text-align: right;
+}
+
+.pop_percent_change_pln_from_eur {
+  grid-column: span 5;
+  text-align: left;
+  padding-left: 2.2em;
+}
+
+.pop_valve_pln,
+.pop_valve_eur {
+  text-align: right;
+}
+
+.pop_valve_percent_change_pln {
+  grid-column: span 4;
+  font-weight: bold;
+}
+
+.pop_valve_percent_change_eur {
+  grid-column: span 2;
+  font-weight: bold;
+}
+
+.pop_description {
+  grid-column: 1 / -1;
+}
+
+.pop sup {
+  font-size: 0.9em;
+  position: relative;
+  top: -0.8em;
+}
+
+.increase { color: #ff9100; }
+.decrease { color: #85b6e1; }
+.positive { color: #a1eb02; }
+.negative { color: #eb495c; }
+.gray     { color: #8f98a0; }
+
+.tooltip .tooltip-text {
+  display: none;
+}
+
+.pop .tooltip-value {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.pop-global-tooltip {
+  position: fixed;
+  background: #1b2838;
+  color: #ccc;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid #555;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease-in-out;
+  transition-delay: 0.8s;
+  z-index: 9999;
+}

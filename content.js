@@ -1,0 +1,189 @@
+(() => {
+
+const BLOCK_ID = 'polish_our_prices';
+
+const tooltip = document.createElement('div');
+tooltip.className = 'pop-global-tooltip';
+document.body.appendChild(tooltip);
+
+let showTimer = null;
+let hideTimer = null;
+
+function attachTooltips() {
+  document.querySelectorAll('.pop .tooltip').forEach(el => {
+    if (el.dataset.popAttached) return;
+    el.dataset.popAttached = '1';
+
+    const textEl = el.querySelector('.tooltip-text');
+    const valueEl = el.querySelector('.tooltip-value');
+    if (!textEl || !valueEl) return;
+
+    valueEl.dataset.tip = textEl.textContent.trim();
+    textEl.remove();
+
+    valueEl.addEventListener('mouseenter', () => {
+      clearTimeout(hideTimer);
+      showTimer = setTimeout(() => {
+        tooltip.textContent = valueEl.dataset.tip;
+        const r = valueEl.getBoundingClientRect();
+        tooltip.style.left = r.left + r.width / 2 + 'px';
+        tooltip.style.top = r.top - 8 + 'px';
+        tooltip.style.transform = 'translate(-50%, -100%)';
+        tooltip.style.opacity = '1';
+      }, 350);
+    });
+
+    valueEl.addEventListener('mouseleave', () => {
+      clearTimeout(showTimer);
+      hideTimer = setTimeout(() => { tooltip.style.opacity = '0'; }, 50);
+    });
+  });
+}
+
+function getAppId() {
+  const match = location.pathname.match(/\/app\/(\d+)/);
+  return match ? match[1] : null;
+}
+
+function fmt(num) {
+  return num.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function fmtSigned(num) {
+  const abs = Math.abs(num).toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return (num >= 0 ? '+' : '-') + abs;
+}
+
+function val(id) {
+  return document.querySelector(`#${id} .tooltip-value`);
+}
+
+function inject() {
+  if (document.getElementById(BLOCK_ID)) return true;
+
+  const anchor = document.querySelector('.block.responsive_apppage_details_right.heading');
+  if (!anchor) return false;
+
+  const block = document.createElement('div');
+  block.className = 'block pop';
+  block.id = BLOCK_ID;
+  block.innerHTML = `
+    <div class="block_content_inner">
+      <div class="pop_grid" dir="ltr">
+
+        <span class="pop_name">Polska:</span>
+        <span class="tooltip pop_pln" id="pop_pln">
+          <span class="tooltip-value"></span>
+          <span class="tooltip-text">Bazowa cena dla polskiego regionu</span>
+        </span>
+        <span class="tooltip pop_valve_percent_change_pln" id="pop_valve_percent_change_pln">
+          <span class="tooltip-value"></span>
+          <span class="tooltip-text">Różnica od sugerowanej ceny (procentowo)</span>
+        </span>
+        <span class="tooltip pop_valve_pln gray" id="pop_valve_pln">
+          <span class="tooltip-value"></span>
+          <span class="tooltip-text">Sugerowana cena dla polskiego regionu</span>
+        </span>
+
+        <span class="pop_name">Euro:</span>
+        <span class="tooltip pop_eur_to_pln" id="pop_eur_to_pln">
+          <span class="tooltip-value"></span>
+          <span class="tooltip-text">Bazowa cena dla Euro regionu przeliczona na złotówki</span>
+        </span>
+        <span class="pop_arrow gray">🡄</span>
+        <span class="tooltip pop_eur" id="pop_eur">
+          <span class="tooltip-value"></span>
+          <span class="tooltip-text">Bazowa cena dla Euro regionu</span>
+        </span>
+        <span class="tooltip pop_valve_percent_change_eur" id="pop_valve_percent_change_eur">
+          <span class="tooltip-value"></span>
+          <span class="tooltip-text">Różnica od sugerowanej ceny (procentowo)</span>
+        </span>
+        <span class="tooltip pop_valve_eur gray" id="pop_valve_eur">
+          <span class="tooltip-value"></span>
+          <span class="tooltip-text">Sugerowana cena dla Euro regionu</span>
+        </span>
+
+        <hr class="pop_separator" />
+
+        <span class="tooltip pop_diff_pln_from_eur" id="pop_diff_pln_from_eur">
+          <span class="tooltip-value"></span>
+          <span class="tooltip-text">Różnica w cenie</span>
+        </span>
+        <span class="tooltip pop_percent_change_pln_from_eur" id="pop_percent_change_pln_from_eur">
+          <span class="tooltip-value"></span>
+          <span class="tooltip-text">Różnica w cenie (procentowo)</span>
+        </span>
+
+        <hr class="pop_separator" />
+
+        <span class="pop_description" id="pop_description">–</span>
+      </div>
+    </div>
+  `;
+
+  anchor.parentNode.insertBefore(block, anchor);
+  return true;
+}
+
+function render(d) {
+  val('pop_pln').textContent = `${fmt(d.price_pln)} zł`;
+  val('pop_valve_pln').textContent = `${fmt(d.valve_price_pln)} zł`;
+  val('pop_eur_to_pln').textContent = `${fmt(d.price_eur_to_pln)} zł`;
+  val('pop_eur').textContent = `${fmt(d.price_eur)} €`;
+  val('pop_valve_eur').textContent = `${fmt(d.valve_price_eur)} €`;
+
+  if (d.valve_price_percent_change_pln !== 0) {
+    const el = document.getElementById('pop_valve_percent_change_pln');
+    el.classList.add(d.valve_price_percent_change_pln > 0 ? 'increase' : 'decrease');
+    val('pop_valve_percent_change_pln').innerHTML = `<sup>${fmtSigned(d.valve_price_percent_change_pln)}%</sup>`;
+  }
+
+  if (d.valve_price_percent_change_eur !== 0) {
+    const el = document.getElementById('pop_valve_percent_change_eur');
+    el.classList.add(d.valve_price_percent_change_eur > 0 ? 'increase' : 'decrease');
+    val('pop_valve_percent_change_eur').innerHTML = `<sup>${fmtSigned(d.valve_price_percent_change_eur)}%</sup>`;
+  }
+
+  const positive = d.pop > 0;
+  document.getElementById('pop_diff_pln_from_eur').classList.add(positive ? 'positive' : 'negative');
+  document.getElementById('pop_percent_change_pln_from_eur').classList.add(positive ? 'positive' : 'negative');
+  val('pop_diff_pln_from_eur').textContent = `${fmtSigned(d.price_diff_pln_from_eur)} zł`;
+  val('pop_percent_change_pln_from_eur').textContent = `( ${fmtSigned(d.price_percent_change_pln_from_eur)}% )`;
+
+  document.getElementById('pop_description').innerHTML =
+    d.description + (d.is_polish_developer ? '<br />Polski developer' : '');
+
+  attachTooltips();
+}
+
+function fetchAndRender() {
+  const appId = getAppId();
+  if (!appId) return;
+
+  chrome.runtime.sendMessage({ type: 'POP_FETCH_INFO', appId }, response => {
+    if (chrome.runtime.lastError || !response?.ok) return;
+    render(response.data);
+  });
+}
+
+function init() {
+  if (inject()) {
+    fetchAndRender();
+    return;
+  }
+
+  const observer = new MutationObserver(() => {
+    if (inject()) {
+      observer.disconnect();
+      fetchAndRender();
+    }
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+  setTimeout(() => observer.disconnect(), 10000);
+}
+
+init();
+
+})();
