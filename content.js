@@ -81,21 +81,21 @@ function inject() {
         <span class="pop_name">Polska:</span>
         <span class="tooltip pop_pln" id="pop_pln">
           <span class="tooltip-value"></span>
-          <span class="tooltip-text">Bazowa cena dla polskiego regionu</span>
+          <span class="tooltip-text">Cena w Polsce</span>
         </span>
         <span class="tooltip pop_valve_percent_change_pln" id="pop_valve_percent_change_pln">
           <span class="tooltip-value"></span>
-          <span class="tooltip-text">Różnica od sugerowanej ceny (procentowo)</span>
+          <span class="tooltip-text">Różnica od ceny sugerowanej (%)</span>
         </span>
         <span class="tooltip pop_valve_pln gray" id="pop_valve_pln">
           <span class="tooltip-value"></span>
-          <span class="tooltip-text">Sugerowana cena dla polskiego regionu</span>
+          <span class="tooltip-text">Cena sugerowana w Polsce</span>
         </span>
 
         <span class="pop_name">Euro:</span>
         <span class="tooltip pop_eur_to_pln" id="pop_eur_to_pln">
           <span class="tooltip-value"></span>
-          <span class="tooltip-text">Bazowa cena dla Euro regionu przeliczona na złotówki</span>
+          <span class="tooltip-text">Euro w PLN</span>
         </span>
         <span class="tooltip pop_arrow gray" id="pop_arrow">
           <span class="tooltip-value">🡄</span>
@@ -103,26 +103,26 @@ function inject() {
         </span>
         <span class="tooltip pop_eur" id="pop_eur">
           <span class="tooltip-value"></span>
-          <span class="tooltip-text">Bazowa cena dla Euro regionu</span>
+          <span class="tooltip-text">Cena w Euro</span>
         </span>
         <span class="tooltip pop_valve_percent_change_eur" id="pop_valve_percent_change_eur">
           <span class="tooltip-value"></span>
-          <span class="tooltip-text">Różnica od sugerowanej ceny (procentowo)</span>
+          <span class="tooltip-text">Różnica od ceny sugerowanej (%)</span>
         </span>
         <span class="tooltip pop_valve_eur gray" id="pop_valve_eur">
           <span class="tooltip-value"></span>
-          <span class="tooltip-text">Sugerowana cena dla Euro regionu</span>
+          <span class="tooltip-text">Cena sugerowana w Euro</span>
         </span>
 
         <hr class="pop_separator" />
 
         <span class="tooltip pop_diff_pln_from_eur" id="pop_diff_pln_from_eur">
           <span class="tooltip-value"></span>
-          <span class="tooltip-text">Różnica w cenie</span>
+          <span class="tooltip-text">Różnica cen</span>
         </span>
         <span class="tooltip pop_percent_change_pln_from_eur" id="pop_percent_change_pln_from_eur">
           <span class="tooltip-value"></span>
-          <span class="tooltip-text">Różnica w cenie (procentowo)</span>
+          <span class="tooltip-text">Różnica cen (%)</span>
         </span>
 
         <hr class="pop_separator" />
