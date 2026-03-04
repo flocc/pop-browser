@@ -58,6 +58,13 @@ function val(id) {
   return document.querySelector(`#${id} .tooltip-value`);
 }
 
+function setPercentChange(id, value) {
+  if (value === 0) return;
+  const el = document.getElementById(id);
+  el.classList.add(value > 0 ? 'increase' : 'decrease');
+  val(id).innerHTML = '<sup>' + fmtSigned(value) + '%</sup>';
+}
+
 function inject() {
   if (document.getElementById(BLOCK_ID)) return true;
 
@@ -130,30 +137,21 @@ function inject() {
 }
 
 function render(d) {
-  val('pop_pln').textContent = `${fmt(d.price_pln)} zł`;
-  val('pop_valve_pln').textContent = `${fmt(d.valve_price_pln)} zł`;
-  val('pop_eur_to_pln').textContent = `${fmt(d.price_eur_to_pln)} zł`;
-  val('pop_eur').textContent = `${fmt(d.price_eur)} €`;
-  val('pop_valve_eur').textContent = `${fmt(d.valve_price_eur)} €`;
-  document.querySelector('.pop_arrow .tooltip-text').textContent = `EUR/PLN = ${fmt(d.eur_to_pln)}`;
+  val('pop_pln').textContent = fmt(d.price_pln) + ' zł';
+  val('pop_valve_pln').textContent = fmt(d.valve_price_pln) + ' zł';
+  val('pop_eur_to_pln').textContent = fmt(d.price_eur_to_pln) + ' zł';
+  val('pop_eur').textContent = fmt(d.price_eur) + ' €';
+  val('pop_valve_eur').textContent = fmt(d.valve_price_eur) + ' €';
+  document.querySelector('.pop_arrow .tooltip-text').textContent = 'EUR/PLN = ' + fmt(d.eur_to_pln);
 
-  if (d.valve_price_percent_change_pln !== 0) {
-    const el = document.getElementById('pop_valve_percent_change_pln');
-    el.classList.add(d.valve_price_percent_change_pln > 0 ? 'increase' : 'decrease');
-    val('pop_valve_percent_change_pln').innerHTML = `<sup>${fmtSigned(d.valve_price_percent_change_pln)}%</sup>`;
-  }
-
-  if (d.valve_price_percent_change_eur !== 0) {
-    const el = document.getElementById('pop_valve_percent_change_eur');
-    el.classList.add(d.valve_price_percent_change_eur > 0 ? 'increase' : 'decrease');
-    val('pop_valve_percent_change_eur').innerHTML = `<sup>${fmtSigned(d.valve_price_percent_change_eur)}%</sup>`;
-  }
+  setPercentChange('pop_valve_percent_change_pln', d.valve_price_percent_change_pln);
+  setPercentChange('pop_valve_percent_change_eur', d.valve_price_percent_change_eur);
 
   const positive = d.pop > 0;
   document.getElementById('pop_diff_pln_from_eur').classList.add(positive ? 'positive' : 'negative');
   document.getElementById('pop_percent_change_pln_from_eur').classList.add(positive ? 'positive' : 'negative');
-  val('pop_diff_pln_from_eur').textContent = `${fmtSigned(d.price_diff_pln_from_eur)} zł`;
-  val('pop_percent_change_pln_from_eur').textContent = `( ${fmtSigned(d.price_percent_change_pln_from_eur)}% )`;
+  val('pop_diff_pln_from_eur').textContent = fmtSigned(d.price_diff_pln_from_eur) + ' zł';
+  val('pop_percent_change_pln_from_eur').textContent = '( ' + fmtSigned(d.price_percent_change_pln_from_eur) + '% )';
 
   document.getElementById('pop_description').innerHTML =
     d.description + (d.is_polish_developer ? '<br />Polski developer' : '');
