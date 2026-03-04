@@ -2,14 +2,14 @@
   font-family: "Motiva Sans", Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .pop .block_content_inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 5px;
+  gap: 3px;
 }
 
 .pop_grid {
@@ -22,7 +22,7 @@
     minmax(max-content, 10fr)
     minmax(max-content, 10fr)
     minmax(max-content, 10fr);
-  gap: 0.5em 0.5em;
+  gap: 0.3em 0.3em;
   margin-bottom: 0.5em;
   align-items: center;
 }
@@ -63,6 +63,7 @@
 .pop_valve_pln,
 .pop_valve_eur {
   text-align: right;
+  color: #666;
 }
 
 .pop_valve_percent_change_pln {
@@ -95,7 +96,7 @@
 }
 
 .pop sup {
-  font-size: 0.9em;
+  font-size: 0.8em;
   position: relative;
   top: -0.8em;
 }

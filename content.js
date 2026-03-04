@@ -90,7 +90,7 @@ function inject() {
           <span class="tooltip-value"></span>
           <span class="tooltip-text">Różnica od ceny sugerowanej (%)</span>
         </span>
-        <span class="tooltip pop_valve_pln gray" id="pop_valve_pln">
+        <span class="tooltip pop_valve_pln" id="pop_valve_pln">
           <span class="tooltip-value"></span>
           <span class="tooltip-text">Cena sugerowana w Polsce</span>
         </span>
@@ -112,7 +112,7 @@ function inject() {
           <span class="tooltip-value"></span>
           <span class="tooltip-text">Różnica od ceny sugerowanej (%)</span>
         </span>
-        <span class="tooltip pop_valve_eur gray" id="pop_valve_eur">
+        <span class="tooltip pop_valve_eur" id="pop_valve_eur">
           <span class="tooltip-value"></span>
           <span class="tooltip-text">Cena sugerowana w Euro</span>
         </span>
