@@ -100,7 +100,7 @@ function inject() {
           <span class="tooltip-value"></span>
           <span class="tooltip-text">Euro w PLN</span>
         </span>
-        <span class="tooltip pop_arrow gray" id="pop_arrow">
+        <span class="tooltip pop_arrow" id="pop_arrow">
           <span class="tooltip-value">🡄</span>
           <span class="tooltip-text"></span>
         </span>

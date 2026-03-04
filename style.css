@@ -30,12 +30,13 @@
 .pop_separator {
   grid-column: 1 / -1;
   border: none;
-  border-top: 1px solid #444;
-  margin: 0.2em 0;
+  border-top: 1px solid #44739c;
+  margin: 0.1em 0;
 }
 
 .pop_arrow {
   justify-self: center;
+  color: #888;
 }
 
 .pop_eur,
@@ -102,8 +103,7 @@
 .increase { color: #ff9100; }
 .decrease { color: #85b6e1; }
 .positive { color: #a1eb02; }
-.negative { color: #eb495c; }
-.gray     { color: #8f98a0; }
+.negative { color: #fc4258; }
 
 .tooltip .tooltip-text {
   display: none;
