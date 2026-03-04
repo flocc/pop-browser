@@ -2,7 +2,7 @@
   font-family: "Motiva Sans", Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .pop .block_content_inner {
@@ -24,6 +24,7 @@
     minmax(max-content, 10fr);
   gap: 0.5em 0.5em;
   margin-bottom: 0.5em;
+  align-items: center;
 }
 
 .pop_separator {
@@ -75,6 +76,21 @@
 
 .pop_description {
   grid-column: 1 / -1;
+}
+
+.pop_name {
+  padding: 0;
+  margin: 0;
+  align-self: center;
+}
+
+.pop_name img {
+  width: 26px;
+  height: 18px;
+  border-radius: 3px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .pop sup {

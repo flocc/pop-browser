@@ -71,6 +71,9 @@ function inject() {
   const anchor = document.querySelector('.block.responsive_apppage_details_right.heading');
   if (!anchor) return false;
 
+  const plFlag = chrome.runtime.getURL('icons/pl.svg');
+  const euFlag = chrome.runtime.getURL('icons/eu.svg');
+
   const block = document.createElement('div');
   block.className = 'block pop';
   block.id = BLOCK_ID;
@@ -78,7 +81,7 @@ function inject() {
     <div class="block_content_inner">
       <div class="pop_grid" dir="ltr">
 
-        <span class="pop_name">Polska:</span>
+        <span class="pop_name"><img src="${plFlag}" alt="PL"></span>
         <span class="tooltip pop_pln" id="pop_pln">
           <span class="tooltip-value"></span>
           <span class="tooltip-text">Cena w Polsce</span>
@@ -92,7 +95,7 @@ function inject() {
           <span class="tooltip-text">Cena sugerowana w Polsce</span>
         </span>
 
-        <span class="pop_name">Euro:</span>
+        <span class="pop_name"><img src="${euFlag}" alt="EU"></span>
         <span class="tooltip pop_eur_to_pln" id="pop_eur_to_pln">
           <span class="tooltip-value"></span>
           <span class="tooltip-text">Euro w PLN</span>

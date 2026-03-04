@@ -7,14 +7,16 @@
     "service_worker": "background.js",
     "scripts": ["background.js"]
   },
-  "content_scripts": [
-    {
-      "matches": ["https://store.steampowered.com/app/*/*"],
-      "js": ["content.js"],
-      "css": ["style.css"],
-      "run_at": "document_end"
-    }
-  ],
+  "content_scripts": [{
+    "matches": ["https://store.steampowered.com/app/*/*"],
+    "js": ["content.js"],
+    "css": ["style.css"],
+    "run_at": "document_end"
+  }],
+  "web_accessible_resources": [{
+    "resources": ["icons/*.svg"],
+    "matches": ["https://store.steampowered.com/*"]
+  }],
   "host_permissions": [
     "https://polishourprices.pl/*"
   ],
