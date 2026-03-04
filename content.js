@@ -1,5 +1,12 @@
 (() => {
 
+// if (window !== window.top) return;
+
+const link = document.createElement('link');
+link.rel = 'stylesheet';
+link.href = chrome.runtime.getURL('style.css');
+document.head.appendChild(link);
+
 const BLOCK_ID = 'polish_our_prices';
 
 const tooltip = document.createElement('div');
@@ -173,6 +180,8 @@ function fetchAndRender() {
 }
 
 function init() {
+  document.getElementById(BLOCK_ID)?.remove();
+
   if (inject()) {
     fetchAndRender();
     return;
@@ -190,5 +199,13 @@ function init() {
 }
 
 init();
+
+let lastUrl = location.href;
+new MutationObserver(() => {
+  if (location.href !== lastUrl) {
+    lastUrl = location.href;
+    init();
+  }
+}).observe(document.body, { childList: true, subtree: true });
 
 })();
