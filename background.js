@@ -13,14 +13,3 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
   return true;
 });
-
-// firefox workaround
-if (typeof browser !== 'undefined') {
-  chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.status !== 'complete') return;
-    if (!tab.url?.match(/https:\/\/store\.steampowered\.com\/app\/\d+/)) return;
-
-    chrome.scripting.executeScript({ target: { tabId }, files: ['content.js'] });
-    chrome.scripting.insertCSS({ target: { tabId }, files: ['style.css'] });
-  });
-}

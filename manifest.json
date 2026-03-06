@@ -4,14 +4,10 @@
   "version": "1.0",
   "description": "xyz",
   "background": {
-    "service_worker": "background.js",
-    "scripts": ["background.js"]
+    "service_worker": "background.js"
   },
   "content_scripts": [{
-    "matches": [
-      "https://store.steampowered.com/app/*/*",
-      "https://steamcommunity.com/*"
-    ],
+    "matches": ["https://store.steampowered.com/app/*/*"],
     "js": ["content.js"],
     "run_at": "document_end"
   }],
@@ -20,11 +16,8 @@
       "style.css",
       "icons/*.svg"
     ],
-    "matches": ["https://store.steampowered.com/*" ]
+    "matches": ["https://store.steampowered.com/*"]
   }],
   "host_permissions": ["https://polishourprices.pl/*"],
-  "permissions": ["scripting", "tabs"],
-  "browser_specific_settings": {
-    "gecko": { "id": "xyz@polishourprices.pl" }
-  }
+  "permissions": ["scripting", "tabs"]
 }
